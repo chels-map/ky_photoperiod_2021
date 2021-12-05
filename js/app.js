@@ -1,154 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <title>US Unemployment by County</title>
-  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin="" />
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: whitesmoke;
-      font-family: Lato, sans-serif;
-      color: #110d0d;
-    }
-
-    h1 {
-      position: absolute;
-      z-index: 650;
-      top: 10px;
-      left: 15px;
-      padding: 8px 15px;
-      margin: 0;
-      color: whitesmoke;
-      font-size: 1.5em;
-      background: rgba(25, 25, 25, 0.8);
-      border-radius: 5px;
-    }
-
-    h2 {
-      display: inline-block;
-      color: #001323;
-    }
-
-    #map {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      bottom: 0;
-    }
-
-    footer {
-      padding: 6px 10%;
-      width: 80%;
-    }
-
-    p {
-      font-size: 1em;
-      color: #001323;
-    }
-
-    .legend {
-      padding: 6px 8px;
-      font-size: 1em;
-      background: rgba(75, 75, 75, 0.8);
-      color: whitesmoke;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      width: 160px;
-    }
-
-    .legend h3 {
-      font-size: 1.1em;
-      font-weight: bold;
-      line-height: 1em;
-      color: whitesmoke;
-      margin: 0;
-    }
-
-    .legend h3 span {
-      font-size: 1.3em;
-      margin: 0 20px 0 0;
-    }
-
-    .legend ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 12px 4px 0;
-    }
-
-    .legend li {
-      list-style-type: none;
-      height: 22px;
-    }
-
-    .legend span {
-      width: 30px;
-      height: 20px;
-      float: left;
-      margin-right: 10px;
-    }
-
-    #ui-controls {
-      width: 176px;
-      padding: 8px 25px 8px 15px;
-      background: rgba(75, 75, 75, 0.8);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      color: whitesmoke;
-    }
-
-    #ui-controls .min {
-      float: left;
-    }
-
-    #ui-controls .max {
-      float: right;
-      margin-right: -15px;
-    }
-
-    .year-slider {
-      width: 100%;
-    }
-
-    label {
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-  </style>
-</head>
-
-<body>
-  <h1>U.S. Unemployment by County 2001 &ndash; 2015</h1>
-  <div id="map"></div>
-  <div id="ui-controls">
-    <label>
-      <span class="min">2001</span>
-      <span class="max">2015</span>
-      <input type="range" min="2001" , max="2015" , value="2001" , step="1" , class="year-slider" />
-    </label>
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
-    integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"
-    integrity="sha512-8TVPS0EFkkmtT6yPb5K4csnSt3tjbKRrs0F8gvTNKv2OxOcwDO7+Klkz86gMVrzfqtZos5N2a+k+r9D+hlccmQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
-
-  <script>
+(function (){
     // map options
     const options = {
       center: [38, -97],
@@ -210,8 +60,7 @@
         console.log(`Ruh roh! An error has occurred`, error);
       });
 
-    //Add new 
-
+      
     function processData(counties, data, states) {
       //Access and calculate new GEOID from the CSV files, then match GEOID between the json and the csv
       // loop through all the counties
@@ -473,7 +322,5 @@
 
     } // end createSliderUI()
 
-  </script>
-</body>
 
-</html>
+})();
