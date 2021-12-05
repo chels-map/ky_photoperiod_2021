@@ -26,35 +26,30 @@
       }
     ).addTo(map);
 
-    const counties = fetch("data/us-counties.json").then(function (r) {
+    //Load GeoJson files
+    const photoperiod = fetch("data/ky_photoperiod.geojson")
+    .then(function (r) {
         return r.json();
       });
-      const states = fetch(
-        "https://newmapsplus.github.io/assets/data/us_states_20m.geojson"
-      ).then(function (r) {
+
+    const counties = fetch("data/ky_counties.geojson")
+      .then(function (r) {
         return r.json();
       });
+
+      const state = fetch("data/ky_state_boundary.geojson")
+      .then(function (r) {
+        return r.json();
+      });
+
 
       // AJAX request for GeoJSON data
-      Promise.all([counties, states])
+      Promise.all([photoperiod, counties, state])
         .then(function (response) {
           console.log(response);
-          const counties = response[0];
-          const states = response[1];
-
-        Papa.parse('data/us-unemployment-counties.csv', {
-
-          download: true,
-          header: true,
-          complete: function (data) {
-
-            // data is accessible to us here
-            //console.log(data.data[0].STATE_FIP); //Return stateFIP code
-
-            //Create function to join data and counties 
-            processData(counties, data, states);
-          }
-        }); // end of Papa.parse()
+          const photoperiod = response[0];
+          const county = response[1];
+          const state = response[2];
       })
       .catch(function (error) {
         console.log(`Ruh roh! An error has occurred`, error);
