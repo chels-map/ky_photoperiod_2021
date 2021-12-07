@@ -17,14 +17,32 @@
     // 	position: "bottomright"
     // }).addTo(map);
 
+    // request hillshade tiles and add to map
+    const hillshade = L.tileLayer(
+      "https://nyc3.digitaloceanspaces.com/astoria/tiles/ky-hillshade/{z}/{x}/{y}.jpg", {
+        attribution: '&copy; UKy Geography',
+          maxZoom: 14.4,
+          minZoom: 2,
+          bounds: [
+              [39.25995919, -89.80883737],
+              [36.09998597, -81.77646750]
+          ]
+      }
+    ).addTo(map);
+
     // request tiles and add to map
     const tiles = L.tileLayer(
       "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         subdomains: "abcd",
         ext: "png",
+        opacity: 0.3,
       }
     ).addTo(map);
+
+  
+
+    
 
     //Load GeoJson files
     const photoperiod = fetch("data/ky_photoperiod.geojson")
