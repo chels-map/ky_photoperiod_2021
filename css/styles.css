@@ -26,7 +26,7 @@ h2 {
 
 #map {
   position: absolute;
-  width: 100%;
+  width: 100%; /*CHANGE THIS AFTER DATA IS ON MAP*/
   top: 0;
   bottom: 0;
 }
@@ -108,3 +108,21 @@ label {
   font-size: 1.1em;
   font-weight: bold;
 }
+
+
+		/* Small devices (landscape phones, 576px and up) */
+		@media (min-width: 576px) {}
+
+		/* Medium devices (tablets, 768px and up) */
+		@media (min-width: 768px) {
+
+			aside {
+				height: 80vh;
+			}
+		}
+
+		/* Large devices (desktops, 992px and up) */
+		@media (min-width: 992px) {}
+
+		/* Extra large devices (large desktops, 1200px and up) */
+		@media (min-width: 1200px) {}

@@ -40,10 +40,6 @@
       }
     ).addTo(map);
 
-  
-
-    
-
     //Load GeoJson files
     const photoperiod = fetch("data/ky_photoperiod.geojson")
     .then(function (r) {
@@ -60,7 +56,6 @@
         return r.json();
       });
 
-
       // AJAX request for GeoJSON data
       Promise.all([photoperiod, counties, state])
         .then(function (response) {
@@ -72,6 +67,66 @@
       .catch(function (error) {
         console.log(`Ruh roh! An error has occurred`, error);
       });
+
+      console.log(photoperiod)
+
+      function drawMap(counties, states) { //COLORIZE as been PASSED through this function, not used within it
+      // create Leaflet object with geometry data and add to map
+      const dataLayer = L.geoJson(counties, {
+        style: function (feature) {
+          return {
+            color: "black",
+            weight: 1,
+            fillOpacity: 1,
+            fillColor: "#1f78b4"
+          };
+        },
+
+        onEachFeature: function (feature, layer) {
+          // when mousing over a layer
+          layer.on("mouseover", function () {
+            // change the stroke color and bring that element to the front
+            layer
+              .setStyle({
+                color: "yellow",
+              })
+              .bringToFront();
+          });
+
+          // on mousing off layer
+          layer.on("mouseout", function () {
+            // reset the layer style to its original stroke color
+            layer.setStyle({
+              color: "black",
+            });
+          });
+        },
+      }).addTo(map);
+
+      L.geoJson(states, {
+          style: function (feature) {
+            return {
+              color: "#20282e", // Gray
+              weight: 2,
+              fillOpacity: 0,
+              interactive: false,
+            };
+          },
+        }).addTo(map);
+
+      //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
+      //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
+      // map.fitBounds(dataLayer.getBounds(), {
+      //   padding: [10, 10],
+      // });
+
+      //create the slider
+      // createSliderUI(dataLayer, colorize);
+
+      //call to initially color the map with first timestamp 
+      //updateMap(dataLayer, colorize, '2001');
+
+    } // end drawMap()
 
       
     // function processData(counties, data, states) {
@@ -161,64 +216,7 @@
 
     // } // end processData()
 
-    // function drawMap(counties, colorize, states) { //COLORIZE as been PASSED through this function, not used within it
-    //   // create Leaflet object with geometry data and add to map
-    //   const dataLayer = L.geoJson(counties, {
-    //     style: function (feature) {
-    //       return {
-    //         color: "black",
-    //         weight: 1,
-    //         fillOpacity: 1,
-    //         fillColor: "#1f78b4"
-    //       };
-    //     },
-
-    //     onEachFeature: function (feature, layer) {
-    //       // when mousing over a layer
-    //       layer.on("mouseover", function () {
-    //         // change the stroke color and bring that element to the front
-    //         layer
-    //           .setStyle({
-    //             color: "yellow",
-    //           })
-    //           .bringToFront();
-    //       });
-
-    //       // on mousing off layer
-    //       layer.on("mouseout", function () {
-    //         // reset the layer style to its original stroke color
-    //         layer.setStyle({
-    //           color: "black",
-    //         });
-    //       });
-    //     },
-    //   }).addTo(map);
-
-    //   L.geoJson(states, {
-    //       style: function (feature) {
-    //         return {
-    //           color: "#20282e", // Gray
-    //           weight: 2,
-    //           fillOpacity: 0,
-    //           interactive: false,
-    //         };
-    //       },
-    //     }).addTo(map);
-
-    //   //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
-    //   //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
-    //   // map.fitBounds(dataLayer.getBounds(), {
-    //   //   padding: [10, 10],
-    //   // });
-
-    //   //create the slider
-    //   createSliderUI(dataLayer, colorize);
-
-    //   //call to initially color the map with first timestamp 
-    //   updateMap(dataLayer, colorize, '2001');
-
-    // } // end drawMap()
-
+    
     // function updateMap(dataLayer, colorize,currentYear) { 
     //   //Loop through each layer of the datalayer
     //   dataLayer.eachLayer(function (layer) {
