@@ -25,8 +25,9 @@ h2 {
 }
 
 #map {
-  position: absolute;
-  width: 100%; /*CHANGE THIS AFTER DATA IS ON MAP*/
+  position: absolute; /*CHANGE THIS AFTER DATA IS ON MAP
+  height: 80%; */ 
+  width: 100%; 
   top: 0;
   bottom: 0;
 }
@@ -100,7 +101,7 @@ p {
   margin-right: -15px;
 }
 
-.year-slider {
+.month-slider {
   width: 100%;
 }
 

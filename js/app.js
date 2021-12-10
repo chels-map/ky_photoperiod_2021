@@ -57,62 +57,71 @@
       });
 
       // AJAX request for GeoJSON data
+      //OK SO THIS WORKS, BUT IDK HOW TO GET IT TO LET ME PASS THE DATA TO A FUNCTION
       Promise.all([photoperiod, counties, state])
         .then(function (response) {
-          console.log(response);
-          const photoperiod = response[0];
-          const county = response[1];
-          const state = response[2];
+          console.log(response); //Has all three geojsons in the one array
+
+          drawMap(response)
       })
       .catch(function (error) {
         console.log(`Ruh roh! An error has occurred`, error);
       });
 
-      console.log(photoperiod)
+      //console.log(photoperiod) //"promise pending" when logged from heres
 
-      function drawMap(counties, states) { //COLORIZE as been PASSED through this function, not used within it
+      function drawMap(data) { 
+        console.log(data) //hello again array of the geojson files
+        const photoperiod = data[0];
+        const county = data[1];
+        const state = data[2];
+
+        console.log(photoperiod); //hello array of photperiod
+
+      }
+      
+      //COLORIZE as been PASSED through this function, not used within it
       // create Leaflet object with geometry data and add to map
-      const dataLayer = L.geoJson(counties, {
-        style: function (feature) {
-          return {
-            color: "black",
-            weight: 1,
-            fillOpacity: 1,
-            fillColor: "#1f78b4"
-          };
-        },
+      // const dataLayer = L.geoJson(counties, {
+      //   style: function (feature) {
+      //     return {
+      //       color: "black",
+      //       weight: 1,
+      //       fillOpacity: 1,
+      //       fillColor: "#1f78b4"
+      //     };
+      //   }
+        // onEachFeature: function (feature, layer) {
+        //   // when mousing over a layer
+        //   layer.on("mouseover", function () {
+        //     // change the stroke color and bring that element to the front
+        //     layer
+        //       .setStyle({
+        //         color: "yellow",
+        //       })
+        //       .bringToFront();
+        //   });
 
-        onEachFeature: function (feature, layer) {
-          // when mousing over a layer
-          layer.on("mouseover", function () {
-            // change the stroke color and bring that element to the front
-            layer
-              .setStyle({
-                color: "yellow",
-              })
-              .bringToFront();
-          });
+        //   // on mousing off layer
+        //   layer.on("mouseout", function () {
+        //     // reset the layer style to its original stroke color
+        //     layer.setStyle({
+        //       color: "black",
+        //     });
+        //   });
+        // },
+      // }).addTo(map);
 
-          // on mousing off layer
-          layer.on("mouseout", function () {
-            // reset the layer style to its original stroke color
-            layer.setStyle({
-              color: "black",
-            });
-          });
-        },
-      }).addTo(map);
-
-      L.geoJson(states, {
-          style: function (feature) {
-            return {
-              color: "#20282e", // Gray
-              weight: 2,
-              fillOpacity: 0,
-              interactive: false,
-            };
-          },
-        }).addTo(map);
+      // L.geoJson(state, {
+      //     style: function (feature) {
+      //       return {
+      //         color: "#20282e", // Gray
+      //         weight: 2,
+      //         fillOpacity: 0,
+      //         interactive: false,
+      //       };
+      //     },
+      //   }).addTo(map);
 
       //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
       //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
@@ -126,7 +135,7 @@
       //call to initially color the map with first timestamp 
       //updateMap(dataLayer, colorize, '2001');
 
-    } // end drawMap()
+    //} // end drawMap()
 
       
     // function processData(counties, data, states) {
