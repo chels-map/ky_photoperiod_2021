@@ -5,7 +5,8 @@
       zoom: 7,
       scrollWheelZoom: true,
       zoomSnap: 0.1,
-      dragging: true
+      dragging: true,
+      zoomControl: false //This will toggle on/off the zoom control by default in the top-left corner 
     };
 
     // create the Leaflet map
@@ -13,9 +14,9 @@
 
     //Could add the zoom control UI to the bottom right instead of the default attached 
     //But the default is still showing up although I deleted the "zoomControl" feature from the map options object
-    // new L.control.zoom({
-    // 	position: "bottomright"
-    // }).addTo(map);
+    new L.control.zoom({
+    	position: "bottomright"
+    }).addTo(map);
 
     // request hillshade tiles and add to map
     const hillshade = L.tileLayer(
@@ -175,7 +176,7 @@
 
         let tooltip
         if (props[currentMonth]) {
-          tooltip = `<b>Average photoperiod:</b> ${props[currentMonth]}`;
+          tooltip = `<b>Average photoperiod:</b> ${Math.round(props[currentMonth])}`;
         } 
 
         //Bind tooltip to the layer
@@ -184,15 +185,15 @@
         });
       });
 
-      //Add the click event! The code is clunky but it works... :) 
-      map.on('click', function (e){
-        dataLayer.eachLayer(function(layer){
-          //Add the click event
-          const props = layer.feature.properties; //re-declare the shorthand for properties
+      // //Not sure what this was for from the lesson, but here's a thing I could try to do I guess 
+      // map.on('click', function (e){
+      //   dataLayer.eachLayer(function(layer){
+      //     //Add the click event
+      //     const props = layer.feature.properties; //re-declare the shorthand for properties
 
-          const tooltip = `<b>${props['NAME']} </b> <br> ${props[currentMonth]}% unemployment`;
-        });
-       });
+      //     const tooltip = `<b>${props['NAME']} </b> <br> ${props[currentMonth]}% unemployment`;
+      //   });
+      //  });
 
     } // end updateMap()
 
@@ -224,8 +225,8 @@
 
         // create legend item
         const classRange = `<li><span style="background:${color}"></span>
-              ${breaks[i].toLocaleString()}&mdash;
-              ${breaks[i + 1].toLocaleString()} </li>`
+              ${(Math.round(breaks[i])).toLocaleString()}&mdash;
+              ${(Math.round(breaks[i + 1])).toLocaleString()} </li>`
 
         // append to legend unordered list item
         legend.innerHTML += classRange;
@@ -273,9 +274,48 @@
 
         const currentMonth = e.target.value; // update the map with current timestamp
 
-        updateMap(dataLayer, colorize, currentMonth); // update timestamp in legend heading
+        updateMap(dataLayer, colorize, currentMonth); 
 
-        document.querySelector(".legend h3 span").innerHTML = currentMonth;
+        //Add legend labes for months
+        var month = "";
+
+        if(currentMonth == 1){
+          month = "January"
+        } else 
+        if(currentMonth == 2){
+          month = "February"
+        } else 
+        if(currentMonth == 3){
+          month = "March"
+        } else
+        if(currentMonth == 4){
+          month = "April"
+        } else
+        if(currentMonth == 5){
+          month = "May"
+        } else
+        if(currentMonth == 6){
+          month = "June"
+        } else
+        if(currentMonth == 7){
+          month = "July"
+        } else
+        if(currentMonth == 8){
+          month = "August"
+        } else
+        if(currentMonth == 9){
+          month = "September"
+        } else
+        if(currentMonth == 10){
+          month = "October"
+        } else
+        if(currentMonth == 11){
+          month = "November"
+        } else 
+        if(currentMonth == 12){
+          month = "December"
+        }
+        document.querySelector(".legend h3 span").innerHTML = month;
       });
 
     } // end createSliderUI()

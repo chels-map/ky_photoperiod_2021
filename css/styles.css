@@ -44,31 +44,32 @@ p {
 
 .legend {
   padding: 6px 8px;
-  font-size: 1em;
+  font-size: 1.2em;
   background: rgba(75, 75, 75, 0.8);
   color: whitesmoke;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  width: 160px;
+  width: 150px;
 }
 
 .legend h3 {
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bold;
   line-height: 1em;
   color: whitesmoke;
-  margin: 0;
+  margin: 10px;                                                               
 }
 
 .legend h3 span {
-  font-size: 1.3em;
+  font-size: 1.5em;
   margin: 0 20px 0 0;
 }
 
+/*WHAT IS THIS EVEN DOING?*/
 .legend ul {
   list-style-type: none;
   padding: 0;
-  margin: 12px 4px 0;
+  margin: 0px 0px 0;
 }
 
 .legend li {
@@ -80,11 +81,11 @@ p {
   width: 30px;
   height: 20px;
   float: left;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 #ui-controls {
-  width: 176px;
+  width: 200px;
   padding: 8px 25px 8px 15px;
   background: rgba(75, 75, 75, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -106,7 +107,7 @@ p {
 }
 
 label {
-  font-size: 1.1em;
+  font-size: 1.4em;
   font-weight: bold;
 }
 
