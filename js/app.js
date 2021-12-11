@@ -46,19 +46,19 @@
         return r.json();
       });
 
-    const counties = fetch("data/ky_counties_housing.json")
-      .then(function (r) {
-        return r.json();
-      });
+    // const counties = fetch("data/ky_counties_housing.json")
+    //   .then(function (r) {
+    //     return r.json();
+    //   });
 
-      const state = fetch("data/ky_state_boundary.geojson")
-      .then(function (r) {
-        return r.json();
-      });
+    //   const state = fetch("data/ky_state_boundary.geojson")
+    //   .then(function (r) {
+    //     return r.json();
+    //   });
 
       // AJAX request for GeoJSON data
       //OK SO THIS WORKS, BUT IDK HOW TO GET IT TO LET ME PASS THE DATA TO A FUNCTION
-      Promise.all([photoperiod, counties, state])
+      Promise.all([photoperiod])
         .then(function (response) {
           //console.log(response); //Has all three geojsons in the one array
 
@@ -72,8 +72,8 @@
 
       function processData(data){
         const photoperiod = data[0];
-        const counties = data[1];
-        const state = data[2];
+        // const counties = data[1]; 
+        // const state = data[2];
 
         //console.log(photoperiod.features[0].properties);
         //console.log("counties", counties);
@@ -276,7 +276,7 @@
 
       // select div and create legend title
       const legend = document.querySelector('.legend')
-      legend.innerHTML = "<h3><span>MONTH</span>Average Photoperiod(minutes)</h3><ul>";
+      legend.innerHTML = "<h3>Month Average Photoperiod(minutes)</h3><ul>";
 
       // loop through the break values
       for (let i = 0; i < breaks.length - 1; i++) {
