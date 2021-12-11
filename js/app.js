@@ -76,12 +76,7 @@
         const state = data[2];
 
         //console.log(photoperiod.features[0].properties);
-
         //console.log("counties", counties);
-
-        //Create an array of ALL photoperiod values to then loop through that array and find the min and max
-        //Well couldn't figure out how to get the IF statement to work, so I'll make a range for December and for June to find my annual min/max values
-        //Find MINIMUM
         const range = []
 
         //iterate through each hex
@@ -90,6 +85,7 @@
           //Add properties that are not the hex coordinates, so add all the photoperiod values
           for (const prop in photo.properties){
             if (prop != "bottom" && prop != "top" && prop != "right" && prop != "left"){
+              //CHANGE MINUTES TO HOURS/MINUTES?? FOR LABELS ETC. 
               range.push (Number(photo.properties[prop]));
             }
           }
@@ -97,16 +93,23 @@
 
         console.log(range); //Yay it works!
 
-        var min = Math.min.apply(Math, range); //Annual minimum 
-        var max = Math.max.apply(Math, range); //Annual maximum
-        var difference = Math.round(max - min); //calculate and round the difference between the max and minimum 
+        //oh LOL chroma.js does this FOR me 
+        var min = Math.min.apply(Math, range); //Annual minimum, 566
+        var max = Math.max.apply(Math, range); //Annual maximum, 894
+        var difference = Math.round(max - min); //Returns 328 minutes; calculate and round the difference between the max and minimum 
         
-        console.log(min); //returns 566.142
-        console.log(max); //return 580
+        //Generate color classification breaks with Chroma.js CHROMA URL https://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=3
+        var breaks = chroma.limits(range, 'q', 15);
 
-        console.log(difference); //returns 328.0
+        var colorize = chroma.scale(chroma.brewer.YlOrRd) //Hmm and how to make this slightly opaque so the basemap comes through?
+          .classes(breaks)
+          .mode('lab');
         
-        drawMap(data)
+        console.log(breaks);
+
+        drawMap(data) 
+
+        drawLegend(breaks, colorize)
       }
 
       function drawMap(data) { 
@@ -141,6 +144,12 @@
 
         //console.log(photoperiod);
 
+        //ADD THE SLIDER UI 
+        //"dataLayer" refers to.... my photoperiods layer I think?
+        //createSliderUI(dataLayer, colorize);
+
+        //Eventually call UpdateMap HERE 
+
       }
 
       // const dataLayer = L.geoJson(county, {
@@ -172,8 +181,6 @@
       //     });
       //   },
       // }).addTo(map);
-
-   
       
       //COLORIZE as been PASSED through this function, not used within it
       // create Leaflet object with geometry data and add to map
@@ -207,8 +214,6 @@
         // },
       // }).addTo(map);
 
-
-
       //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
       //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
       // map.fitBounds(dataLayer.getBounds(), {
@@ -218,98 +223,10 @@
       //create the slider
       // createSliderUI(dataLayer, colorize);
 
-      //call to initially color the map with first timestamp 
+      //call to initially color the map with first timestamp - which for me is MONTHS 
       //updateMap(dataLayer, colorize, '2001');
 
     //} // end drawMap()
-
-      
-    // function processData(counties, data, states) {
-    //   //Access and calculate new GEOID from the CSV files, then match GEOID between the json and the csv
-    //   // loop through all the counties
-    //   console.log('data:', data);
-    //   console.log('counties:', counties);
-
-    //   // Some of the GEOIDs are not joined, so test for them.
-    //     // make empty array for for not joined GEOIDs
-    //     let notJoined = [];
-
-    //   //For each county feature
-    //   for (let i of counties.features) {
-    //     // set testing variable
-    //     let joined = false;
-
-    //     // for each of the CSV data rows
-    //     for (let j of data.data) {
-          
-    //       //console.log(j.STATE_FIP + j.COUNTY_FIP);
-    //       //declare new GEOID variable for the unemployment rates for the attribute join -- to join if GEOIDs match
-    //       const newGEOID = j.STATE_FIP + j.COUNTY_FIP;
-    //       j.csvGEOID = newGEOID;
-
-    //       if (i.properties.GEOID === j.csvGEOID) {
-
-    //         //DO THE TABLE JOIN
-    //         i.properties = j;
-    //         // If the above is true, then we have a join!
-    //         joined = true;
-
-    //         break;
-    //       }
-    //     }
-    //     // Test to see if joined variable was not set to true
-    //     if (!joined) {
-    //         notJoined.push(i.properties.GEOID);
-    //         // county.properties = ''
-    //       }
-    //   }
-    //   console.log('notJoined:', notJoined);
-      
-    //   console.log('after:', counties);
-
-    //   //Notes for "Classifying the data and mapping to colors"
-    //   //in Model 2, we reclassdiied the data each time with a new data attribute
-    //   //This is good for when we want different class breaks for different ranges and distributions of data (ie vacant housing data vs mortgage value data)
-    //   //For this module, we want to create classification breaks one time since we're comparing year to year with the entire range of data over the years 
-    //   //^^^This making the breaks ONE time across all months is what I want to do with the photoperiod maps
-
-    //   //After we match up all of the FIPS codes, we can make an empty array to store all the data values
-    //   // This is storing our range of values for making the classification breaks!!
-    //   const rates = [];
-
-    //   // iterate through all the counties
-    //   counties.features.forEach(function (county) {
-
-    //     // iterate through all the props of each county
-    //     for (const prop in county.properties) {
-
-    //       // if the attribute is a number and not one of the fips codes or name
-    //       // if (prop != "COUNTY_FIP" && prop != "STATE_FIP" && prop != "NAME" && prop != "csvGEOID" && prop != "GEOID") {
-    //         // push that attribute value into the array
-    //         // OR
-    //       if (prop.includes('20')) {
-    //         rates.push(Number(county.properties[prop]));
-    //       }
-    //     }
-    //   });
-    //   // verify the result!
-    //   console.log(rates);
-
-    //   //Data Classification and Color Mapping with Chroma.js
-    //   // create class breaks
-    //   var breaks = chroma.limits(rates, 'q', 5);
-
-    //   // create color generator function
-    //   var colorize = chroma.scale(chroma.brewer.OrRd)
-    //     .classes(breaks)
-    //     .mode('lab');
-
-
-    //   drawMap(counties, colorize, states);
-
-    //   drawLegend(breaks, colorize);
-
-    // } // end processData()
 
     
     // function updateMap(dataLayer, colorize,currentYear) { 
@@ -349,45 +266,44 @@
 
     // } // end updateMap()
 
-    // function drawLegend(breaks, colorize) {
-    //   // create a Leaflet control for the legend
-    //   const legendControl = L.control({
-    //     position: 'topright'
-    //   });
+    function drawLegend(breaks, colorize) {
+      // create a Leaflet control for the legend
+      const legendControl = L.control({
+        position: 'bottomleft'
+      });
 
-    //   // when the control is added to the map
-    //   legendControl.onAdd = function (map) {
+      // when the control is added to the map
+      legendControl.onAdd = function (map) {
+        // create a new division element with class of 'legend' and return
+        const legend = L.DomUtil.create('div', 'legend');
+        return legend;
+      };
 
-    //     // create a new division element with class of 'legend' and return
-    //     const legend = L.DomUtil.create('div', 'legend');
-    //     return legend;
-    //   };
+      // add the legend control to the map
+      legendControl.addTo(map);
 
-    //   // add the legend control to the map
-    //   legendControl.addTo(map);
+      // select div and create legend title
+      const legend = document.querySelector('.legend')
+      legend.innerHTML = "<h3><span>MONTH</span>Average Photoperiod(minutes)</h3><ul>";
 
-    //   // select div and create legend title
-    //   const legend = document.querySelector('.legend')
-    //   legend.innerHTML = "<h3><span>2001</span> Unemployment Rates</h3><ul>";
+      // loop through the break values
+      for (let i = 0; i < breaks.length - 1; i++) {
 
-    //   // loop through the break values
-    //   for (let i = 0; i < breaks.length - 1; i++) {
+        // determine color value 
+        const color = colorize(breaks[i], breaks);
 
-    //     // determine color value 
-    //     const color = colorize(breaks[i], breaks);
+        // create legend item
+        const classRange = `<li><span style="background:${color}"></span>
+              ${breaks[i].toLocaleString()}&mdash;
+              ${breaks[i + 1].toLocaleString()} </li>`
 
-    //     // create legend item
-    //     const classRange = `<li><span style="background:${color}"></span>
-    //           ${breaks[i].toLocaleString()}&mdash;
-    //           ${breaks[i + 1].toLocaleString()}% </li>`
+        // append to legend unordered list item
+        legend.innerHTML += classRange;
+      }
+      // close legend unordered list
+      legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
 
-    //     // append to legend unordered list item
-    //     legend.innerHTML += classRange;
-    //   }
-    //   // close legend unordered list
-    //   legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
-
-    // } // end drawLegend()
+    } // end drawLegend()
 
     // function createSliderUI(dataLayer, colorize) {
     //   // create Leaflet control for the slider

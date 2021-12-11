@@ -20,44 +20,17 @@
 
 <body>
     
-	<div class="container-fluid">
-		<header class="row bg-dark text-white py-4">
-			<div class="col">
-				<h1>Photoperiod per Month in Kentucky</h1>
-			</div>
-		</header>
+	<h1>Photoperiod per Month in Kentucky</h1>
+	<div id="map"></div>
 
-		<section class="row">
-			<div class="col-md-8 col-lg-9 col-xl-10 order-md-1 px-0">
-        <div id="map"></div>
-			</div>
-			<aside id="about"
-				class="col-md-4 col-lg-3 col-xl-2 order-md-2 text-white py-2 pl-3 bg-secondary overflow-auto">
-				<section>
-					<h3 class="py-2">Daylength with a Purpose</h3>
-					<p>TEXT
-					</p>
-					<p>MORE TEXT
-					</p>
-				</section>
-			</aside>
-		</section>
-
-		<footer class="row bg-dark text-white py-1">
-			<div class="col">
-				<ul class="list-unstyled">
-					<li>Authored by <a href="https://www.linkedin.com/in/maupin/">Chelsea Maupin</a></li>
-					<li>Data from Dr. Garrett Owen of the University of Kentucky Horticulture Department
-						with county and state boundaries from the U.S. Census 
-            <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">
-              Cartographic Boundary Files</a></li>
-				</ul>
-			</div>
-		</footer>
+	<!--The UI Control Slides needs to be changed to show MONTHS-->
+	<div id="ui-controls">
+	  <label>
+		<span class="min">2006</span>
+		<span class="max">2015</span>
+		<input type="range" min="2006" , max="2015" , value="2006" , step="1" , class="year-slider" />
+	  </label>
 	</div>
-  
-    <!-- legend is outside of container-fluid and will be dynamically added to map -->
-    <div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
   
   
     <!-- Add Bootstrap -->
@@ -69,13 +42,10 @@
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
-    integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"
     integrity="sha512-8TVPS0EFkkmtT6yPb5K4csnSt3tjbKRrs0F8gvTNKv2OxOcwDO7+Klkz86gMVrzfqtZos5N2a+k+r9D+hlccmQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
+	
   <script src="js/app.js"></script>
  
 
