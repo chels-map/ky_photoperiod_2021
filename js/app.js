@@ -41,7 +41,7 @@
     ).addTo(map);
 
     //Load GeoJson files
-    const photoperiod = fetch("data/ky_photoperiod.json")
+    const photoperiod = fetch("data/ky_photoperiod.geojson")
     .then(function (r) {
         return r.json();
       });
@@ -129,18 +129,38 @@
         L.geoJson(counties).addTo(map);
       
         //THIS LOADS IN MAPSHAPER BUT NOT NOW...WHY....
-        //L.geoJSON(photoperiod).addTo(map);
+        L.geoJSON(photoperiod).addTo(map);
 
-        // L.geoJson(county, {
-        //   style: function (feature) {
-        //     return {
-        //       color: "pink",
-        //       weight: 2,
-        //       fillOpacity: .5,
-        //       interactive: false,
-        //     };
-        //   },
-        // }).addTo(map);
+      // // EXAMPLE FROM LESSON: create Leaflet object with geometry data and add to map
+      // const dataLayer = L.geoJson(photoperiod, {
+      //   style: function (feature) {
+      //     return {
+      //       color: "black",
+      //       weight: 1,
+      //       fillOpacity: 1,
+      //       fillColor: "#1f78b4"
+      //     };
+      //   },
+      //   onEachFeature: function (feature, layer) {
+      //     // when mousing over a layer
+      //     layer.on("mouseover", function () {
+      //       // change the stroke color and bring that element to the front
+      //       layer
+      //         .setStyle({
+      //           color: "yellow",
+      //         })
+      //         .bringToFront();
+      //     });
+
+      //     // on mousing off layer
+      //     layer.on("mouseout", function () {
+      //       // reset the layer style to its original stroke color
+      //       layer.setStyle({
+      //         color: "black",
+      //       });
+      //     });
+      //   },
+      // }).addTo(map);
 
         //console.log(photoperiod);
 
@@ -183,36 +203,8 @@
       // }).addTo(map);
       
       //COLORIZE as been PASSED through this function, not used within it
-      // create Leaflet object with geometry data and add to map
-      // const dataLayer = L.geoJson(counties, {
-      //   style: function (feature) {
-      //     return {
-      //       color: "black",
-      //       weight: 1,
-      //       fillOpacity: 1,
-      //       fillColor: "#1f78b4"
-      //     };
-      //   }
-        // onEachFeature: function (feature, layer) {
-        //   // when mousing over a layer
-        //   layer.on("mouseover", function () {
-        //     // change the stroke color and bring that element to the front
-        //     layer
-        //       .setStyle({
-        //         color: "yellow",
-        //       })
-        //       .bringToFront();
-        //   });
 
-        //   // on mousing off layer
-        //   layer.on("mouseout", function () {
-        //     // reset the layer style to its original stroke color
-        //     layer.setStyle({
-        //       color: "black",
-        //     });
-        //   });
-        // },
-      // }).addTo(map);
+
 
       //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
       //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
