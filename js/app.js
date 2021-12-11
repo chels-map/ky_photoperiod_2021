@@ -134,7 +134,7 @@
               // change the stroke color and bring that element to the front
               layer
                 .setStyle({
-                  color: "yellow",
+                  color: "black",
                 })
                 .bringToFront();
             });
@@ -161,7 +161,6 @@
       // map.fitBounds(dataLayer.getBounds(), {
       //   padding: [5, 5],
       // });
-
     
     function updateMap(dataLayer, colorize,currentMonth) { 
       //Loop through each layer of the datalayer
@@ -173,30 +172,26 @@
           fillColor: colorize(Number(props[currentMonth])),
           fillOpacity: .5 //Add opacity so we can see the hillshade basemap
         });
-      //   let tooltip
-      //   if (props['NAME']) {
 
-      //     tooltip = `<b>${props['NAME']} </b> <br>
-      //                   ${props[currentYear]}% unemployment`;
+        let tooltip
+        if (props[currentMonth]) {
+          tooltip = `<b>Average photoperiod:</b> ${props[currentMonth]}`;
+        } 
 
-      //   } else {
-      //     tooltip = `No data`;
-      //   }
-      
-      //   //Bind tooltip to the layer
-      //   layer.bindTooltip(tooltip, {
-      //     sticky: true
-      //   });
-      // });
+        //Bind tooltip to the layer
+        layer.bindTooltip(tooltip, {
+          sticky: true
+        });
+      });
 
-      // //Add the click event! The code is clunky but it works... :) 
-      // map.on('click', function (e){
-      //   dataLayer.eachLayer(function(layer){
-      //     //Add the click event
-      //     const props = layer.feature.properties; //red-declare the shorthand for properties
+      //Add the click event! The code is clunky but it works... :) 
+      map.on('click', function (e){
+        dataLayer.eachLayer(function(layer){
+          //Add the click event
+          const props = layer.feature.properties; //re-declare the shorthand for properties
 
-      //     const tooltip = `<b>${props['NAME']} </b> <br> ${props[currentYear]}% unemployment`;
-      //   });
+          const tooltip = `<b>${props['NAME']} </b> <br> ${props[currentMonth]}% unemployment`;
+        });
        });
 
     } // end updateMap()
@@ -219,7 +214,7 @@
 
       // select div and create legend title
       const legend = document.querySelector('.legend')
-      legend.innerHTML = "<h3>Month Average Photoperiod (minutes)</h3><ul>";
+      legend.innerHTML = "<h3> <span>January</span> <br> Average Photoperiod <br>(minutes)</h3><ul>";
 
       // loop through the break values
       for (let i = 0; i < breaks.length - 1; i++) {
@@ -234,8 +229,8 @@
 
         // append to legend unordered list item
         legend.innerHTML += classRange;
-      }
-      // close legend unordered list
+      }// close legend unordered list
+
       //IF THERE WERE NULL VALUES COULD UNCOMMENT BELOW CODE TO SHOW THE 'NO DATA' COLORING
       //legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
 
@@ -273,9 +268,14 @@
 
       // listen for changes on input element
       slider.addEventListener("input", function (e) { // get the value of the selected option
-        const currentYear = e.target.value; // update the map with current timestamp
-        updateMap(dataLayer, colorize, currentYear); // update timestamp in legend heading
-        document.querySelector(".legend h3 span").innerHTML = currentYear;
+
+        //CHANGE LABEL TO BE THE NAME OF THE MONTH AND NOT THE NUMBER!!
+
+        const currentMonth = e.target.value; // update the map with current timestamp
+
+        updateMap(dataLayer, colorize, currentMonth); // update timestamp in legend heading
+
+        document.querySelector(".legend h3 span").innerHTML = currentMonth;
       });
 
     } // end createSliderUI()
