@@ -176,7 +176,13 @@
 
         let tooltip
         if (props[currentMonth]) {
-          tooltip = `<b>Average photoperiod:</b> ${Math.round(props[currentMonth])}`;
+          //Take the photoperiod property and apply a label as hours, minutes format 
+          console.log(props[currentMonth]);
+          const hours = Math.floor((props[currentMonth])/60); 
+          console.log(hours);
+          const minutes = Math.round((props[currentMonth]-(hours*60)));
+          console.log(minutes);
+          tooltip = `<b>Average photoperiod:</b> ${hours} hours, ${minutes} minutes`;
         } 
 
         //Bind tooltip to the layer
