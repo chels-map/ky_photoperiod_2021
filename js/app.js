@@ -30,15 +30,15 @@
       }
     ).addTo(map);
 
-    // request tiles and add to map
-    const tiles = L.tileLayer(
-      "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: "abcd",
-        ext: "png",
-        opacity: 0.3,
-      }
-    ).addTo(map);
+    // // OTHER OPTIONAL BASEMAP
+    // const tiles = L.tileLayer(
+    //   "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
+    //     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    //     subdomains: "abcd",
+    //     ext: "png",
+    //     opacity: 0.3,
+    //   }
+    // ).addTo(map);
 
     //Load GeoJson files
     const photoperiod = fetch("data/ky_photoperiod.geojson")
@@ -122,7 +122,7 @@
         const dataLayer = L.geoJson(photoperiod, {
           style: function (feature) {
             return {
-              color: "black",
+              color: "", //No hex outlines
               weight: 1,
               fillOpacity: 1,
               fillColor: "#1f78b4"
@@ -143,7 +143,7 @@
             layer.on("mouseout", function () {
               // reset the layer style to its original stroke color
               layer.setStyle({
-                color: "black",
+                color: "",
               });
             });
           },
@@ -157,23 +157,21 @@
 
       }// End updateMap COLORIZE as been PASSED through this function, not used within it
       
-   
-
-      //Set Zoom/center to the Map's extent, but for whatever reason in the Lab03 Assignment
-      //it is detecting the entire globe (the base map?) as the extent for the datalayer attribute 
+      // // Set Zoom/center to the Map's extent if I wanna
       // map.fitBounds(dataLayer.getBounds(), {
-      //   padding: [10, 10],
+      //   padding: [5, 5],
       // });
 
     
-    function updateMap(dataLayer, colorize,currentYear) { 
+    function updateMap(dataLayer, colorize,currentMonth) { 
       //Loop through each layer of the datalayer
       dataLayer.eachLayer(function (layer) {
         //Declare the shorthand for accessing each property
         const props = layer.feature.properties;
         //Set the style of the map depending on the current years
         layer.setStyle({
-          fillColor: colorize(Number(props[currentYear]))
+          fillColor: colorize(Number(props[currentMonth])),
+          fillOpacity: .5 //Add opacity so we can see the hillshade basemap
         });
       //   let tooltip
       //   if (props['NAME']) {
@@ -238,7 +236,8 @@
         legend.innerHTML += classRange;
       }
       // close legend unordered list
-      legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
+      //IF THERE WERE NULL VALUES COULD UNCOMMENT BELOW CODE TO SHOW THE 'NO DATA' COLORING
+      //legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
 
     } // end drawLegend()
 
