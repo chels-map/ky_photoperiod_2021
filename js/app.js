@@ -2,7 +2,7 @@
     // map options
     const options = {
       center: [37.8, -85.85],
-      zoom: 7,
+      zoom: 7.3,
       scrollWheelZoom: true,
       zoomSnap: 0.1,
       dragging: true,
@@ -31,15 +31,15 @@
       }
     ).addTo(map);
 
-    // // OTHER OPTIONAL BASEMAP
-    // const tiles = L.tileLayer(
-    //   "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
-    //     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    //     subdomains: "abcd",
-    //     ext: "png",
-    //     opacity: 0.3,
-    //   }
-    // ).addTo(map);
+    // OTHER OPTIONAL BASEMAP
+    const tiles = L.tileLayer(
+      "http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}", {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: "abcd",
+        ext: "png",
+        opacity: 0.3,
+      }
+    ).addTo(map);
 
     //Load GeoJson files
     const photoperiod = fetch("data/ky_photoperiod.geojson")
@@ -230,9 +230,12 @@
         const color = colorize(breaks[i], breaks);
 
         // create legend item
+        //TO DO
+        //Edit labels to be hours/minutes
         const classRange = `<li><span style="background:${color}"></span>
-              ${(Math.round(breaks[i])).toLocaleString()}&mdash;
-              ${(Math.round(breaks[i + 1])).toLocaleString()} </li>`
+              ${((Math.floor(breaks[i]))).toLocaleString()}&mdash;
+              ${(Math.floor(breaks[i + 1])).toLocaleString()} </li>`
+
 
         // append to legend unordered list item
         legend.innerHTML += classRange;
