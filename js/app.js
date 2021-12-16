@@ -29,7 +29,17 @@
               [36.09998597, -81.77646750]
           ]
       }
-    ).addTo(map);
+    )
+	// Remove base map on initial load but show on high zoom level
+	map.on('zoom', () => {
+		if (map.getZoom() > 8) {
+			hillshade.addTo(map)
+		} else {
+			hillshade.removeFrom(map)
+		}
+	})
+	
+	
 
     // OTHER OPTIONAL BASEMAP
     const tiles = L.tileLayer(
@@ -76,8 +86,8 @@
         // const counties = data[1]; 
         // const state = data[2];
 
-        console.log(photoperiod.features[0].properties.top);
-        console.log(photoperiod.features[0].properties);
+        // console.log(photoperiod.features[0].properties.top);
+        // console.log(photoperiod.features[0].properties);
         
         const range = []
         //iterate through each hex
@@ -177,11 +187,11 @@
         let tooltip
         if (props[currentMonth]) {
           //Take the photoperiod property and apply a label as hours, minutes format 
-          console.log(props[currentMonth]);
+          // console.log(props[currentMonth]);
           const hours = Math.floor((props[currentMonth])/60); 
-          console.log(hours);
+          // console.log(hours);
           const minutes = Math.round((props[currentMonth]-(hours*60)));
-          console.log(minutes);
+          // console.log(minutes);
           tooltip = `<b>Average photoperiod:</b> ${hours} hours, ${minutes} minutes`;
         } 
 
