@@ -13,8 +13,7 @@ The data was provided by Dr. Garrett Owen from the University of Kentucky. Data 
 ## Technology Stack 
 - Photoperiod point layer averaged per hex of a hex grid occurred in QGIS
 - The map web page created with the JS libraries Leaflet and Bootstrap
-- Appropriate color scales and legends will be generated with the Chroma.js library's function ColorBrewer
+- Appropriate color scales and legends generated with the Chroma.js library's function ColorBrewer
 - The map will be hosted on GitHub pages
 
-
-[Map available here](https://chels-map.github.io/ky_photoperiod_2021/)
+[Map available HERE](https://chels-map.github.io/ky_photoperiod_2021/)
