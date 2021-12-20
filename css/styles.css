@@ -1,45 +1,44 @@
 body {
   margin: 0;
   padding: 0;
-  background: whitesmoke;
-  font-family: Lato, sans-serif;
-  color: #110d0d;
+  background: rgb(33, 37, 41);
+  font-family: Lato, serif;
+  font-size: .9em;
+  color: #e7e7e7;
 }
 
 h1 {
-  position: absolute;
-  z-index: 650;
-  top: 10px;
-  left: 15px;
-  padding: 8px 15px;
-  margin: 0;
-  color: whitesmoke;
-  font-size: 1.5em;
-  background: rgba(25, 25, 25, 0.8);
-  border-radius: 5px;
+  display: inline-block;
+  font-size: 1.8em;
+  font-family: Share, cursive;
+  font-weight: bold;
+  color: #f1ba02;
 }
 
 h2 {
   display: inline-block;
-  color: #001323;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #e7e7e7;
 }
 
 #map {
-  position: absolute; /*CHANGE THIS AFTER DATA IS ON MAP
-  height: 80%; */ 
-  width: 100%; 
+  position: absolute;
+  /*CHANGE THIS AFTER DATA IS ON MAP
+  height: 80%; */
+  width: 100%;
   top: 0;
-  bottom: 0;
+  bottom: 42px;
 }
 
 footer {
-  padding: 6px 10%;
-  width: 80%;
+  padding: 2px;
+  width: 100%;
 }
 
 p {
   font-size: 1em;
-  color: #001323;
+  color: #e7e7e7;
 }
 
 .legend {
@@ -47,7 +46,7 @@ p {
   font-size: 1.2em;
   background: rgba(75, 75, 75, 0.8);
   color: whitesmoke;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(75, 75, 75, 0.8);
   border-radius: 5px;
   width: 210px;
 }
@@ -57,19 +56,12 @@ p {
   font-weight: bold;
   line-height: 1em;
   color: whitesmoke;
-  margin: 10px;                                                               
+  margin: 10px;
 }
 
 .legend h3 span {
-  font-size: 1.4em;
+  font-size: 1.8em;
   margin: 0 20px 0 0;
-}
-
-/*WHAT IS THIS EVEN DOING?*/
-.legend ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0px 0px 0;
 }
 
 .legend li {
@@ -85,7 +77,7 @@ p {
 }
 
 #ui-controls {
-  width: 200px;
+  width: 210px;
   padding: 8px 25px 8px 15px;
   background: rgba(75, 75, 75, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -99,7 +91,7 @@ p {
 
 #ui-controls .max {
   float: right;
-  margin-right: -15px;
+  margin-right: -12px;
 }
 
 .month-slider {
@@ -111,19 +103,19 @@ label {
   font-weight: bold;
 }
 
-		/* Small devices (landscape phones, 576px and up) 
-		@media (min-width: 576px) {}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
 
-		Medium devices (tablets, 768px and up) 
-		@media (min-width: 768px) {
+/*Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
 
-			aside {
-				height: 80vh;
-			}
-		}
+  aside {
+    height: 80vh;
+  }
+}
 
-		Large devices (desktops, 992px and up) 
-		@media (min-width: 992px) {}
+/*Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
 
-		Extra large devices (large desktops, 1200px and up) 
-		@media (min-width: 1200px) {} */
+/*Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

@@ -8,35 +8,78 @@
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share:ital,wght@1,700&display=swap" rel="stylesheet">
+
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-  <link rel = "stylesheet" href="css/styles.css"/>
- 
+
+  <link rel="stylesheet" href="css/styles.css" />
+  
+
 </head>
 
 <body>
-    
-	<h1>Photoperiod per Month in Kentucky</h1>
-	<div id="map"></div>
 
-	<!--The UI Control Slides needs to be changed to show MONTHS-->
-	<div id="ui-controls">
-	  <label>
-		<span class="min">January</span>
-		<span class="max">December</span>
-		<input type="range" min="1" , max="12" , value="1" , step="1" , class="month-slider" />
-	  </label>
-	</div>
-  
-  
-    <!-- Add Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
-    </script>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div id="content" class="col-md-2 py-2"> <!--Add back "overflow-scroll" ??-->
+        <p>
+          <h1>Photoperiod per month in Kentucky</h1>
+          <h2>What is photoperiod?</h2>
+          Photoperiod is an important driver of crop physiological processes, especially flowering. For many Spring/Fall vegetable crops, bolting, i.e. crop flower, 
+          can be expected when photoperiods exceed 12 hours per day. Here's <a href = "https://extension.oregonstate.edu/news/what-are-short-day-long-day-plants"> an explanation</a> of the different between long-day and short-day plants. 
+          <br>
+          Here's a more <a href = "https://www.canr.msu.edu/news/bolting-in-spring-vegetables"> detailed description</a> of spring crop physiology from Michigan State University. 
+        </p>
+        <h2>How to use this map</h2>
+        <p>
+          HOWWWWW
+          <br>
+          Map by NewMapsPlus student Chels-Map, with data from Dr. Garrett Owen from the University of Kentucky<a href = "https://www.uky.edu/hort/">Horticulture Department</a>
+        </p>
+      </div>
+
+      <div class="col-md-10 p-0">
+
+        <div id="map">
+        </div>
+
+        <!--The UI Control Slides needs to be changed to show MONTHS-->
+        <div id="ui-controls">
+          <label>
+            <span class="min">January</span>
+            <span class="max">December</span>
+            <input type="range" min="1" , max="12" , value="1" , step="1" , class="month-slider" />
+          </label>
+        </div>
+
+      </div>
+
+      <footer class="footer fixed-bottom bg-dark" id="footer">
+        <div class="row">
+          <div class="col-12 text-center text-white pt-2">
+            <h2>ADD SOME STUFF</h2>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+
+
+  <!-- Add Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+  </script>
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -45,9 +88,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.2/chroma.min.js"
     integrity="sha512-8TVPS0EFkkmtT6yPb5K4csnSt3tjbKRrs0F8gvTNKv2OxOcwDO7+Klkz86gMVrzfqtZos5N2a+k+r9D+hlccmQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"> </script>
-	
+
   <script src="js/app.js"></script>
- 
+
 
 </body>
 

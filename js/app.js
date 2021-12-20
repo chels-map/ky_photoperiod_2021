@@ -187,11 +187,11 @@
         let tooltip
         if (props[currentMonth]) {
           //Take the photoperiod property and apply a label as hours, minutes format 
-          // console.log(props[currentMonth]);
+          //console.log(props[currentMonth]);
           const hours = Math.floor((props[currentMonth])/60); 
-          // console.log(hours);
+          //console.log(hours);
           const minutes = Math.round((props[currentMonth]-(hours*60)));
-          // console.log(minutes);
+          //console.log(minutes);
           tooltip = `<b>Average photoperiod:</b> ${hours} hours, ${minutes} minutes`;
         } 
 
@@ -200,16 +200,6 @@
           sticky: true
         });
       });
-
-      // //Not sure what this was for from the lesson, but here's a thing I could try to do I guess 
-      // map.on('click', function (e){
-      //   dataLayer.eachLayer(function(layer){
-      //     //Add the click event
-      //     const props = layer.feature.properties; //re-declare the shorthand for properties
-
-      //     const tooltip = `<b>${props['NAME']} </b> <br> ${props[currentMonth]}% unemployment`;
-      //   });
-      //  });
 
     } // end updateMap()
 
@@ -231,7 +221,7 @@
 
       // select div and create legend title
       const legend = document.querySelector('.legend')
-      legend.innerHTML = "<h3> <span>January</span> <br> Average Photoperiod <br>(minutes)</h3><ul>";
+      legend.innerHTML = "<h3> <span>January</span> <br> <br> Average Photoperiod <br></h3>";
 
       // loop through the break values
       for (let i = 0; i < breaks.length - 1; i++) {
@@ -239,20 +229,24 @@
         // determine color value 
         const color = colorize(breaks[i], breaks);
 
-        // create legend item
-        //TO DO
-        //Edit labels to be hours/minutes
+        var hours1 = (Math.floor(breaks[i]/60));
+        var hours2 = (Math.floor(breaks[i+1]/60));
+ 
+        var minutes1 = (Math.floor(breaks[i]-hours1*60));
+        var minutes2 = (Math.floor(breaks[i+1]-hours2*60));
+        console.log(hours1,minutes1);
+        console.log(hours2,minutes2);
+
         const classRange = `<li><span style="background:${color}"></span>
-              ${((Math.floor(breaks[i]))).toLocaleString()}&mdash;
-              ${(Math.floor(breaks[i + 1])).toLocaleString()} </li>`
+              ${(hours1).toLocaleString()}h, ${(minutes1).toLocaleString()}m &mdash;
+              ${(hours2).toLocaleString()}h, ${(minutes2).toLocaleString()}m</li>`
+
 
 
         // append to legend unordered list item
         legend.innerHTML += classRange;
       }// close legend unordered list
 
-      //IF THERE WERE NULL VALUES COULD UNCOMMENT BELOW CODE TO SHOW THE 'NO DATA' COLORING
-      //legend.innerHTML += `<li><span style="background:lightgray"></span>No data</li></ul>`;
 
     } // end drawLegend()
 
