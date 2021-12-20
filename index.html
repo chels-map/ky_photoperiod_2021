@@ -20,6 +20,8 @@
 
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
 
+  <link href = "css/all.css" rel = "stylesheet"> <!--Add FontAwesome-->
+
   <link rel="stylesheet" href="css/styles.css" />
   
 
@@ -30,19 +32,14 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div id="content" class="col-md-2 py-2"> <!--Add back "overflow-scroll" ??-->
+      <div id="content" class="col-md-2 py-2 overflow-auto">
         <p>
-          <h1>Photoperiod per month in Kentucky</h1>
+          <h1>Photoperiod per month in Kentucky <i class="fas fa-sun"></i></h1>
           <h2>What is photoperiod?</h2>
-          Photoperiod is an important driver of crop physiological processes, especially flowering. For many Spring/Fall vegetable crops, bolting, i.e. crop flower, 
-          can be expected when photoperiods exceed 12 hours per day. Here's <a href = "https://extension.oregonstate.edu/news/what-are-short-day-long-day-plants"> an explanation</a> of the different between long-day and short-day plants. 
-          <br>
-          Here's a more <a href = "https://www.canr.msu.edu/news/bolting-in-spring-vegetables"> detailed description</a> of spring crop physiology from Michigan State University. 
-        </p>
-        <h2>How to use this map</h2>
-        <p>
-          HOWWWWW
-          <br>
+          Photoperiod is the duration of daylight a crop experiences per day and is an important driver of crop physiological processes, especially flowering. For example, many cool-season vegetable crops that are planted in early Spring will begin to flower (also called "bolting")
+          when photoperiods exceed 12 hours. These cool-season crops are long-day plants, meaning they flower when days become longer. Here's <a href = "https://extension.oregonstate.edu/news/what-are-short-day-long-day-plants"> additional information about</a> long-day and short-day plants, 
+          and a<a href = "https://www.canr.msu.edu/news/bolting-in-spring-vegetables"> detailed description</a> of spring crop physiology from Michigan State University. 
+          <br><br>
           Map by NewMapsPlus student Chels-Map, with data from Dr. Garrett Owen from the University of Kentucky<a href = "https://www.uky.edu/hort/">Horticulture Department</a>
         </p>
       </div>
@@ -52,7 +49,7 @@
         <div id="map">
         </div>
 
-        <!--The UI Control Slides needs to be changed to show MONTHS-->
+        <!--The UI Control-->
         <div id="ui-controls">
           <label>
             <span class="min">January</span>
@@ -63,15 +60,15 @@
 
       </div>
 
-      <footer class="footer fixed-bottom bg-dark" id="footer">
-        <div class="row">
-          <div class="col-12 text-center text-white pt-2">
-            <h2>ADD SOME STUFF</h2>
-          </div>
-        </div>
-      </footer>
 
     </div>
+    <footer class="footer fixed-bottom bg-dark" id="footer">
+      <div class="row">
+        <div class="col-12 text-center text-white pt-2">
+          <h1><i class="fas fa-sun"></i></h1><h2>Let the Sun Shine In </h2> <h1><i class="fas fa-sun"></i></h1>
+        </div>
+      </div>
+    </footer>
 
   </div>
 

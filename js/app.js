@@ -38,8 +38,6 @@
 			hillshade.removeFrom(map)
 		}
 	})
-	
-	
 
     // OTHER OPTIONAL BASEMAP
     const tiles = L.tileLayer(
@@ -57,18 +55,7 @@
         return r.json();
       });
 
-    // const counties = fetch("data/ky_counties_housing.json")
-    //   .then(function (r) {
-    //     return r.json();
-    //   });
-
-    //   const state = fetch("data/ky_state_boundary.geojson")
-    //   .then(function (r) {
-    //     return r.json();
-    //   });
-
       // AJAX request for GeoJSON data
-      //OK SO THIS WORKS, BUT IDK HOW TO GET IT TO LET ME PASS THE DATA TO A FUNCTION
       Promise.all([photoperiod])
         .then(function (response) {
           //console.log(response); //Has all three geojsons in the one array
@@ -79,15 +66,8 @@
         console.log(`Ruh roh! An error has occurred`, error);
       });
 
-      //console.log(photoperiod) //"promise pending" when logged from heres
-
       function processData(data){
         const photoperiod = data[0];
-        // const counties = data[1]; 
-        // const state = data[2];
-
-        // console.log(photoperiod.features[0].properties.top);
-        // console.log(photoperiod.features[0].properties);
         
         const range = []
         //iterate through each hex
@@ -112,11 +92,9 @@
         //Generate color classification breaks with Chroma.js CHROMA URL https://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=3
         var breaks = chroma.limits(range, 'q', 20);
 
-        var colorize = chroma.scale(chroma.brewer.YlOrRd) //Hmm and how to make this slightly opaque so the basemap comes through?
+        var colorize = chroma.scale(chroma.brewer.YlOrRd)
           .classes(breaks)
           .mode('lab');
-        
-        //console.log(breaks);
 
         drawMap(data, colorize) 
 
@@ -166,12 +144,7 @@
         //Eventually call UpdateMap HERE 
         updateMap(dataLayer, colorize, '1');
 
-      }// End updateMap COLORIZE as been PASSED through this function, not used within it
-      
-      // // Set Zoom/center to the Map's extent if I wanna
-      // map.fitBounds(dataLayer.getBounds(), {
-      //   padding: [5, 5],
-      // });
+      }// End updateMap
     
     function updateMap(dataLayer, colorize,currentMonth) { 
       //Loop through each layer of the datalayer
