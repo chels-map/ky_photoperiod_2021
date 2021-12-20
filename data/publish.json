@@ -1,0 +1,7 @@
+{
+    "title": "Photoperiod in Kentucky",
+    "info": "Average photoperiod per month spanning one year is displayed on the map as hexes with hover-over tooltip of site-specific photoperiod data", 
+    "coordinates": [37.8, -85.85],
+    "author": "Chels-Map",
+    "link": "https://chels-map.github.io/ky_photoperiod_2021/"
+  }
