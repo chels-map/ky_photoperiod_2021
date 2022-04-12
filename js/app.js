@@ -33,7 +33,7 @@
   )
   // Remove base map on initial load but show on high zoom level
   map.on('zoom', () => {
-    if (map.getZoom() > 8) {
+    if (map.getZoom() > 7.5) {
       hillshade.addTo(map)
     } else {
       hillshade.removeFrom(map)
@@ -46,7 +46,7 @@
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       subdomains: "abcd",
       ext: "png",
-      opacity: 0.3,
+      opacity: 0.4,
     }
   ).addTo(map);
 
