@@ -24,6 +24,7 @@
       attribution: '&copy; UKy Geography',
       maxZoom: 14.4,
       minZoom: 2,
+      opacity: 0.7,
       bounds: [
         [39.25995919, -89.80883737],
         [36.09998597, -81.77646750]
